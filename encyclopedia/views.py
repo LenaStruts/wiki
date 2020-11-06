@@ -91,3 +91,9 @@ def search(request):
             "found": found
         })
 
+
+def random(request):
+    entries = util.list_entries()
+    random_entry = secrets.choice(entries)
+    return HttpResponseRedirect(reverse("entry", kwargs={'title': random_entry}))
+
