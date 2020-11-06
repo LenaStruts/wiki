@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %} 
+{% load crispy_forms_tags %}
+    {% block title %} 
+        New Entry 
+    {% endblock %} 
+    {%block body%}
+    <h1>Create New Entry</h1>
+    {% if entry_exists is True %}
+        <p>Entry already exists!</p>
+    {% endif %}
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-10 mb-0">
+                    {{ form.title|as_crispy_field }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10 mb-0">
+                    {{ form.content|as_crispy_field }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-info save">Save</button>
+    </form>
+    {% endblock %}
