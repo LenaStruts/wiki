@@ -1,6 +1,19 @@
+import secrets
 from django.shortcuts import render
+from django import forms
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from . import util
+
+from markdown2 import Markdown
+
+markdowner = Markdown()
+
+class NewEntry(forms.Form):
+    title = forms.CharField(label='Entry Title')
+    content = forms.CharField(label='Entry text', widget=forms.Textarea(attrs={'placeholder': 'Write your entry text here...'}))
+   
 
 
 def index(request):
@@ -37,3 +50,20 @@ def add(request):
         "form": NewEntry(),
         "entry_exists": entry_exists
     })
+
+
+def edit(request, title):
+    if request.method == "POST":
+        form=NewEntry(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+            util.save_entry(title, content)
+            return render(request, "encyclopedia/entry.html", {
+            "entry": markdowner.convert(content),
+            "entry_title": title
+        })
+    else:
+        entry_page = util.get_entry(title)
+        form=NewEntry(initial={'title': title, 'content': entry_page})
+        return render(request, "encyclopedia/edit.html", {'form': form})

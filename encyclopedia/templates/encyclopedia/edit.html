@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %} 
+{% load crispy_forms_tags %}
+    {% block title %} 
+        {{ entry_title }} 
+    {% endblock %} 
+    {% block body %}
+        <form method="POST" class="post-form">{% csrf_token %} 
+            <div class="form-row">
+                <div class="form-group col-md-10 mb-0">
+                    {{ form.title|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-10 mb-0">
+                    {{ form.content|as_crispy_field }}
+                </div>
+            </div>
+            <input class="btn btn-outline-info save" type="submit" value="Save">
+        </form>
+    {% endblock %}

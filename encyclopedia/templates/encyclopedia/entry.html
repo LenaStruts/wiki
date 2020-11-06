@@ -3,6 +3,8 @@
         {{ entry_title }} 
     {% endblock %} 
     {% block body %}
-        
+        <div class="edit">
+            <a class="btn btn-default pencil" href="/wiki/{{ entry_title }}/edit/" role="button"><i class="fas fa-edit fa-2x"></i></a>
+        </div>
         {{ entry|safe }} 
     {% endblock %}
