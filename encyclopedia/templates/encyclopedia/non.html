@@ -1,0 +1,11 @@
+{% extends "encyclopedia/layout.html" %} 
+    {% block title %} 
+        {{ entry_title }} does not exist 
+    {% endblock %} 
+    {% block body %}
+
+        <h3>{{ entry_title }} does not exist!</h3>
+        <div class="edit">
+            <p>Create this {{ entry_title }} entry here <a class="btn btn-outline-secondary pencil" href="{% url 'add' %}" role="button"><i class="fas fa-plus"></i></a>
+        </div>
+    {% endblock %}
