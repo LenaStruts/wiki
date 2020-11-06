@@ -67,3 +67,27 @@ def edit(request, title):
         entry_page = util.get_entry(title)
         form=NewEntry(initial={'title': title, 'content': entry_page})
         return render(request, "encyclopedia/edit.html", {'form': form})
+
+
+def search(request):
+    found = False
+    value = request.GET.get('q')
+    entries = util.list_entries()
+    if(util.get_entry(value) is not None):
+        found = True
+        return render(request, "encyclopedia/entry.html", {
+            "entry": markdowner.convert(util.get_entry(value)),
+            "entry_title": value
+        })
+    else:
+        filtered_entries = []
+        for entry in util.list_entries():
+            if value.lower() in entry.lower():
+                filtered_entries.append(entry)
+                found = True
+        return render(request, "encyclopedia/search_results.html", {
+            "filtered_entries": filtered_entries,
+            "entry": entry,
+            "found": found
+        })
+
