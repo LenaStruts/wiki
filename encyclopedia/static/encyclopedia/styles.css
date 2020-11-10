@@ -36,3 +36,32 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+
+.asteriskField {
+    display: none;
+}
+
+a {
+    color: #999999;
+}
+
+a:hover {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+.edit .pencil {
+    color: #999999;
+}
+
+.edit .pencil:hover {
+    color: #17a2b8;
+}
+
+.save {
+    font-weight: bold;
+}
+
+.list {
+    color: #333333;
+}
