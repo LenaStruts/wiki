@@ -39,6 +39,10 @@ def add(request):
             content = form.cleaned_data["content"]
             if util.get_entry(title) is None:
                 util.save_entry(title, content)
+                return render(request, "encyclopedia/entry.html", {
+                "entry": markdowner.convert(content),
+                "entry_title": title
+                })
             else:
                 entry_exists = True
     return render(request, "encyclopedia/add.html", {
