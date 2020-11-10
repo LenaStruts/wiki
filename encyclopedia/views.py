@@ -1,21 +1,16 @@
-import secrets
 from django.shortcuts import render
-from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .forms import NewEntry
 
 from . import util
+
+import secrets
 
 from markdown2 import Markdown
 
 markdowner = Markdown()
-
-class NewEntry(forms.Form):
-    title = forms.CharField(label='Entry Title')
-    content = forms.CharField(label='Entry text', widget=forms.Textarea(attrs={'placeholder': 'Write your entry text here ...'}))
    
-
-
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
