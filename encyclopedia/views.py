@@ -30,8 +30,8 @@ def entry(request, title):
         })
     else:
         return render(request, "encyclopedia/entry.html", {
-            "entry": markdowner.convert(entry_page),
-            "entry_title": title
+            "entry_title": title,
+            "entry": markdowner.convert(entry_page)
         })
 
 
